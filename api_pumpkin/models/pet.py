@@ -1,3 +1,6 @@
+import uuid
+
+
 class Pet(object):
     BASE_PRICE = 45
 
@@ -14,7 +17,10 @@ class Pet(object):
         return self._id
 
     def set_id(self, id):
-        self._id = id
+        if id is None:
+            self._id = str(uuid.uuid1())
+        else:
+            self._id = id
 
     def get_age(self):
         return self._age

@@ -48,7 +48,7 @@ class Pet(object):
 
     def set_zip_code(self, zip_code):
         if isinstance(zip_code, str):
-            if re.match('\d{5}$', zip_code):
+            if re.match(r'\d{5}$', zip_code):
                 self._zip_code = zip_code
             else:
                 raise ValueError('Zip code must be 5 digits long e.g. 00000')

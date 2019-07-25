@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "173badde6c6c2e70213f01ad3a3a7367c423d3a63deae8fbe19cd8b49f80218e"
+            "sha256": "10ef74ee5247f12c70a5512438b89593d0e0a5f1ef543782a45859dbf63a5ad1"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -89,18 +89,18 @@
     "develop": {
         "boto3": {
             "hashes": [
-                "sha256:6a950bf98b22812896ea0f833a26d448acfdf43179f41f389d501af7a9fae328",
-                "sha256:cfbc062a76a7781af8e6a4ea26ebcafa3866872a8cceb05fdbf588c36e7848f0"
+                "sha256:39639612c90086b11f45fbf6a9ece2d1f24b125cc4e9f296b4b476070e6c674f",
+                "sha256:f80634723c7fb94daa4ef3a9706d6d9552a5da6c2329327cd86884c76cf6e95f"
             ],
             "index": "pypi",
-            "version": "==1.9.195"
+            "version": "==1.9.196"
         },
         "botocore": {
             "hashes": [
-                "sha256:691627c2aeff0fcbd9237985717c28404a628181fd3e86b7be500bf2ee156007",
-                "sha256:c59e9981db9dfc54f0d22f731ca8de904760049a9c60d86dcedde84ae64ef4f0"
+                "sha256:9cc7cef3628283eda069d470d01097434a27e1ffd978f6e0ca387348db7b602c",
+                "sha256:ef4028943ccab0459086a07e1d6492601e39b440761a325686047981165bbd80"
             ],
-            "version": "==1.12.195"
+            "version": "==1.12.196"
         },
         "docutils": {
             "hashes": [
@@ -117,13 +117,13 @@
             ],
             "version": "==0.9.4"
         },
-        "pep8": {
+        "pycodestyle": {
             "hashes": [
-                "sha256:b22cfae5db09833bb9bd7c8463b53e1a9c9b39f12e304a8d0bba729c501827ee",
-                "sha256:fe249b52e20498e59e0b5c5256aa52ee99fc295b26ec9eaa85776ffdb9fe6374"
+                "sha256:95a2219d12372f05704562a14ec30bc76b05a5b297b21a5dfe3f6fac3491ae56",
+                "sha256:e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c"
             ],
             "index": "pypi",
-            "version": "==1.7.1"
+            "version": "==2.5.0"
         },
         "python-dateutil": {
             "hashes": [

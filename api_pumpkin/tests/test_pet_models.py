@@ -22,6 +22,105 @@ class PetModelsTest(unittest.TestCase):
         self.assertEqual(pet.name, 'Spot')
         self.assertEqual(pet.species, 'dog')
 
+    def test_age_validation(self):
+        pet_dict = {
+            'age': '2',
+            'breed': 'golden_retriever',
+            'zip_code': '10704',
+            'gender': 'male',
+            'name': 'Spot',
+            'species': 'dog'
+        }
+
+        with self.assertRaises(TypeError):
+            pet = Pet(**pet_dict)
+
+    def test_breed_validation(self):
+        pet_dict = {
+            'age': 2,
+            'breed': 1,
+            'zip_code': '10704',
+            'gender': 'male',
+            'name': 'Spot',
+            'species': 'dog'
+        }
+
+        with self.assertRaises(TypeError):
+            pet = Pet(**pet_dict)
+
+        pet_dict['breed'] = ''
+
+        with self.assertRaises(ValueError):
+            pet = Pet(**pet_dict)
+
+    def test_zip_code_validation(self):
+        pet_dict = {
+            'age': 2,
+            'breed': 'golden_retriever',
+            'zip_code': 10704,
+            'gender': 'male',
+            'name': 'Spot',
+            'species': 'dog'
+        }
+
+        with self.assertRaises(TypeError):
+            pet = Pet(**pet_dict)
+
+        pet_dict['zip_code'] = '1070'
+        with self.assertRaises(ValueError):
+            pet = Pet(**pet_dict)
+
+        pet_dict['zip_code'] = '10702334'
+        with self.assertRaises(ValueError):
+            pet = Pet(**pet_dict)
+
+    def test_gender_validation(self):
+        pet_dict = {
+            'age': 2,
+            'breed': 'golden_retriever',
+            'zip_code': '10704',
+            'gender': 1,
+            'name': 'Spot',
+            'species': 'dog'
+        }
+
+        with self.assertRaises(TypeError):
+            pet = Pet(**pet_dict)
+
+        pet_dict['gender'] = 'not_male'
+        with self.assertRaises(ValueError):
+            pet = Pet(**pet_dict)
+
+    def test_species_validation(self):
+        pet_dict = {
+            'age': 2,
+            'breed': 'golden_retriever',
+            'zip_code': '10704',
+            'gender': 'male',
+            'name': 'Spot',
+            'species': 1
+        }
+
+        with self.assertRaises(TypeError):
+            pet = Pet(**pet_dict)
+
+        pet_dict['species'] = 'whale'
+        with self.assertRaises(ValueError):
+            pet = Pet(**pet_dict)
+
+    def test_name_validation(self):
+        pet_dict = {
+            'age': 2,
+            'breed': 'golden_retriever',
+            'zip_code': '10704',
+            'gender': 'male',
+            'name': 1,
+            'species': 'dog'
+        }
+
+        with self.assertRaises(TypeError):
+            pet = Pet(**pet_dict)
+
     def test_quote_base(self):
         pet_dict = {
             'id': 1,
@@ -126,7 +225,7 @@ class PetModelsTest(unittest.TestCase):
         cat = PetCat(**cat_dict)
         self.assertEqual(cat.quote(), 183.0600)
 
-    def test_quote_unsoported_species(self):
+    def test_unsupported_species(self):
         bird_dict = {
             'id': 1,
             'age': 9,
@@ -136,7 +235,6 @@ class PetModelsTest(unittest.TestCase):
             'name': 'Fluffy',
             'species': 'bird'
         }
-        bird = Pet(**bird_dict)
 
-        with self.assertRaises(Exception):
-            bird.quote()
+        with self.assertRaises(ValueError):
+            bird = Pet(**bird_dict)

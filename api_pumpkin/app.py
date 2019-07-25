@@ -36,7 +36,10 @@ def list_pets():
 
 @app.route('/pets', methods=['POST'])
 def create_pets():
-    pet = app.pumking_service.insert_pet(**request.json)
+    try:
+        pet = app.pumking_service.insert_pet(**request.json)
+    except (ValueError, TypeError) as ex:
+        return jsonify({'error': str(ex)}), 400
     return jsonify(pet.to_dict()), 201
 
 

@@ -1,4 +1,5 @@
 import uuid
+import re
 
 
 class Pet(object):
@@ -26,37 +27,70 @@ class Pet(object):
         return self._age
 
     def set_age(self, age):
-        self._age = age
+        if isinstance(age, int):
+            self._age = age
+        else:
+            raise TypeError('Age must be an integer type')
 
     def get_breed(self):
         return self._breed
 
     def set_breed(self, breed):
-        self._breed = breed
+        if isinstance(breed, str):
+            if breed.strip() == '':
+                raise ValueError('Breed cannot be empty')
+            self._breed = breed.lower()
+        else:
+            raise TypeError('Breed must be a string')
 
     def get_zip_code(self):
         return self._zip_code
 
     def set_zip_code(self, zip_code):
-        self._zip_code = zip_code
+        if isinstance(zip_code, str):
+            if re.match('\d{5}$', zip_code):
+                self._zip_code = zip_code
+            else:
+                raise ValueError('Zip code must be 5 digits long e.g. 00000')
+        else:
+            raise TypeError('Zip code must be a string')
 
     def get_gender(self):
         return self._gender
 
     def set_gender(self, gender):
-        self._gender = gender
+        supported = ['female', 'male']
+        if isinstance(gender, str):
+            gender = gender.lower()
+            if gender in supported:
+                self._gender = gender
+            else:
+                raise ValueError(f'Supported genders {supported}')
+        else:
+            raise TypeError('Gender must be a string')
 
     def get_name(self):
         return self._name
 
     def set_name(self, name):
-        self._name = name
+        if isinstance(name, str):
+            self._name = name
+        else:
+            raise TypeError('Name must be a string')
 
     def get_species(self):
         return self._species
 
     def set_species(self, species):
-        self._species = species
+        supported = ['cat', 'dog']
+        if isinstance(species, str):
+            species = species.lower()
+            if species in supported:
+                self._species = species
+            else:
+                raise ValueError(f'Supported species {supported}')
+        else:
+            raise TypeError('Species must be a string')
 
     id = property(get_id, set_id)
     age = property(get_age, set_age)

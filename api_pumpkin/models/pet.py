@@ -95,6 +95,17 @@ class Pet(object):
 
         return round(self.BASE_PRICE * (sum), 4)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'age': self.age,
+            'breed': self.breed,
+            'zip_code': self.zip_code,
+            'gender': self.gender,
+            'name': self.name,
+            'species': self.species,
+        }
+
 
 class PetDog(Pet):
     def __init__(self, **kwargs):

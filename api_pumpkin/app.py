@@ -1,7 +1,23 @@
 # app.py
 
-from flask import Flask
+from flask import Flask, request, jsonify
+import os
+import boto3
+from api_pumpkin.models.pet import Pet, PetDog, PetCat
+
 app = Flask(__name__)
+
+PETS_TABLE = os.environ['PETS_TABLE']
+IS_OFFLINE = os.environ.get('IS_OFFLINE')
+
+if IS_OFFLINE:
+    DYNAMO_DB_CLIENT = boto3.client(
+        'dynamodb',
+        region_name='localhost',
+        endpoint_url='http://localhost:8000'
+    )
+else:
+    DYNAMO_DB_CLIENT = boto3.client('dynamodb')
 
 
 @app.route('/pets', methods=['GET'])

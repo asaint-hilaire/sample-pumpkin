@@ -3,7 +3,8 @@
 from flask import Flask, request, jsonify
 import os
 import boto3
-from api_pumpkin.models.pet import Pet, PetDog, PetCat
+from api_pumpkin.utils.exceptions import DoesNotExist
+from api_pumpkin.service.pet_service import PetService
 
 app = Flask(__name__)
 
@@ -19,103 +20,41 @@ if IS_OFFLINE:
 else:
     DYNAMO_DB_CLIENT = boto3.client('dynamodb')
 
+app.pumking_service = PetService(client=DYNAMO_DB_CLIENT,
+                                 config={'PETS_TABLE': PETS_TABLE})
+
 
 @app.route('/pets', methods=['GET'])
 def list_pets():
-    resp = DYNAMO_DB_CLIENT.scan(TableName=PETS_TABLE)
     pets = []
-    for item in resp.get('Items'):
+    for pet in app.pumking_service.get_pets():
         pets.append(
-            Pet(
-                id=item.get('id').get('S'),
-                name=item.get('name').get('S'),
-                age=int(item.get('age').get('N')),
-                breed=item.get('breed').get('S'),
-                gender=item.get('gender').get('S'),
-                species=item.get('species').get('S'),
-                zip_code=item.get('zip_code').get('S'),
-            ).to_dict()
+            pet.to_dict()
         )
-
     return jsonify(pets), 200
 
 
 @app.route('/pets', methods=['POST'])
 def create_pets():
-    if request.json.get('id') is not None:
-        del request.json['id']
-
-    pet = Pet(**request.json)
-    resp = DYNAMO_DB_CLIENT.put_item(
-        TableName=PETS_TABLE,
-        Item={
-            'id': {'S': pet.id},
-            'name': {'S': pet.name},
-            'age': {'N': str(pet.age)},
-            'breed': {'S': pet.breed},
-            'gender': {'S': pet.gender},
-            'species': {'S': pet.species},
-            'zip_code': {'S': pet.zip_code}
-        }
-    )
-
+    pet = app.pumking_service.insert_pet(**request.json)
     return jsonify(pet.to_dict()), 201
 
 
 @app.route('/pets/<string:pet_id>', methods=['GET'])
 def get_pets(pet_id):
-    resp = DYNAMO_DB_CLIENT.get_item(
-        TableName=PETS_TABLE,
-        Key={
-            'id': {'S': pet_id}
-        }
-    )
+    try:
+        pet = app.pumking_service.get_pet(pet_id=pet_id)
+    except DoesNotExist:
+        return jsonify({'error': DoesNotExist.message}), 404
 
-    item = resp.get('Item')
-    if not item:
-        return jsonify({'error': 'Pet does not exist'}), 404
-
-    return jsonify(
-        Pet(
-             id=item.get('id').get('S'),
-             name=item.get('name').get('S'),
-             age=int(item.get('age').get('N')),
-             breed=item.get('breed').get('S'),
-             gender=item.get('gender').get('S'),
-             species=item.get('species').get('S'),
-             zip_code=item.get('zip_code').get('S'),
-        ).to_dict()
-        ), 200
+    return jsonify(pet.to_dict()), 200
 
 
 @app.route('/pets/<string:pet_id>/quote', methods=['POST'])
 def create_quote(pet_id):
-    resp = DYNAMO_DB_CLIENT.get_item(
-        TableName=PETS_TABLE,
-        Key={
-            'id': {'S': pet_id}
-        }
-    )
-
-    item = resp.get('Item')
-    if not item:
-        return jsonify({'error': 'Pet does not exist'}), 404
-
-    pet_dict = {
-        'id': item.get('id').get('S'),
-        'name': item.get('name').get('S'),
-        'age': int(item.get('age').get('N')),
-        'breed': item.get('breed').get('S'),
-        'gender': item.get('gender').get('S'),
-        'species': item.get('species').get('S'),
-        'zip_code': item.get('zip_code').get('S'),
-    }
-
-    if item.get('species').get('S') == 'dog':
-        pet = PetDog(**pet_dict)
-    elif item.get('species').get('S') == 'cat':
-        pet = PetCat(**pet_dict)
-    else:
-        pet = Pet(**pet_dict)
+    try:
+        pet = app.pumking_service.get_pet(pet_id=pet_id)
+    except DoesNotExist:
+        return jsonify({'error': DoesNotExist.message}), 404
 
     return jsonify({'quote': pet.quote()}), 200

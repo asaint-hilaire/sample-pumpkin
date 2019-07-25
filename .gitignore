@@ -18,6 +18,7 @@ var/
 node_modules/
 # Serverless directories
 .serverless
+.dynamodb
 # Development environment
 .DS_STORE
 **/.vscode/*

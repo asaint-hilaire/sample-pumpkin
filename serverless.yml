@@ -5,6 +5,7 @@ service: api-pumpkin
 plugins:
   - serverless-python-requirements
   - serverless-wsgi
+  - serverless-dynamodb-local
 
 custom:
   tableName: 'pets-${self:provider.stage}'
@@ -16,6 +17,8 @@ custom:
   dynamodb:
     start:
       migrate: true
+    stages:
+      - test
 
 provider:
   name: aws

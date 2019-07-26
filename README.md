@@ -1,4 +1,14 @@
 # sample-pumpkin
+#### System requirements
+
+Software   | Version used
+---------- | -------------
+Python     | 3.7.3
+pipenv     | 2018.11.26
+Node       | 10.16.0
+npm        | 6.10.2
+serverless | 1.45.1
+
 #### To create the development environment
 
 Install dependencies

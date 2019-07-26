@@ -238,3 +238,7 @@ class PetModelsTest(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             bird = Pet(**bird_dict)
+
+
+if __name__ == '__main__':
+    unittest.main()

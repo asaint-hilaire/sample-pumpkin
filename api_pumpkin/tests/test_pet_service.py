@@ -135,3 +135,7 @@ class PetServiceTest(unittest.TestCase):
 
     def tearDown(self):
         self.service = None
+
+
+if __name__ == '__main__':
+    unittest.main()

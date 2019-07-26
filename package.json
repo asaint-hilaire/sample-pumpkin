@@ -2,6 +2,11 @@
   "name": "pumpkin.backend",
   "version": "1.0.0",
   "description": "",
+  "scripts": {
+    "precodeMetrics": "rm -rf code_metrics && mkdir code_metrics && (pipenv shell || echo '')",
+    "codeMetrics": "cd code_metrics && coverage run --source=api_pumpkin --omit='*__*','*test*' -m unittest discover -s ../api_pumpkin/ && coverage html && rm -f .coverage",
+    "postcodeMetrics": "pycodestyle ./api_pumpkin | pepper8 > ./code_metrics/linting.html"
+  },
   "devDependencies": {
     "serverless-dynamodb-local": "^0.2.38",
     "serverless-python-requirements": "^4.3.0",

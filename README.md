@@ -1,13 +1,17 @@
 # sample-pumpkin
 #### To create the development environment
 
-Install Dependencies
+Install dependencies
 
 `npm i`
 
 `pipenv sync -d`
 
 `pipenv shell`
+
+Install dynamodb
+
+`sls dynamodb install`
 
 Run serverless local dynamodb
 
@@ -17,16 +21,9 @@ Run serverless local wsgi
 
 `sls wsgi serve`
 
-
 #### Generate metrics
-From the root directory of the project
 
-Use the virtual environment by using the `pipenv shell` command
-
-`pycodestyle ./api_pumpkin | pepper8 > ./code_metrics/linting.html`
-
-`coverage run --source=api_pumpkin --omit='*__*','*test*' -m unittest discover`
-
+`npm run codeMetrics`
 
 #### Endpoints
 

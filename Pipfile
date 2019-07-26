@@ -8,6 +8,7 @@ werkzeug = "*"
 boto3 = "*"
 pycodestyle = "*"
 pepper8 = "*"
+coverage = "*"
 
 [packages]
 flask = "*"

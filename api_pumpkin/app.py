@@ -49,8 +49,8 @@ def create_pets():
 def get_pets(pet_id):
     try:
         pet = app.pumking_service.get_pet(pet_id=pet_id)
-    except DoesNotExist:
-        return jsonify(response(error=DoesNotExist.message)), 404
+    except DoesNotExist as ex:
+        return jsonify(response(error=str(ex))), 404
 
     return jsonify(response(payload=pet.to_dict())), 200
 
@@ -59,7 +59,7 @@ def get_pets(pet_id):
 def create_quote(pet_id):
     try:
         pet = app.pumking_service.get_pet(pet_id=pet_id)
-    except DoesNotExist:
-        return jsonify(response(error=DoesNotExist.message)), 404
+    except DoesNotExist as ex:
+        return jsonify(response(error=str(ex))), 404
 
     return jsonify(response(payload={'quote': pet.quote()})), 200

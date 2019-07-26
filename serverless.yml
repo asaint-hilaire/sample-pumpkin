@@ -20,6 +20,13 @@ custom:
     stages:
       - dev
 
+package:
+  include:
+    - api_pumpkin/**
+    - '!api_pumpkin/tests/**'
+  exclude:
+    - ./*
+
 provider:
   name: aws
   runtime: python3.7

@@ -21,14 +21,14 @@ if IS_OFFLINE:
 else:
     DYNAMO_DB_CLIENT = boto3.client('dynamodb')
 
-app.pumking_service = PetService(client=DYNAMO_DB_CLIENT,
+app.pumpkin_service = PetService(client=DYNAMO_DB_CLIENT,
                                  config={'PETS_TABLE': PETS_TABLE})
 
 
 @app.route('/pets', methods=['GET'])
 def list_pets():
     pets = []
-    for pet in app.pumking_service.get_pets():
+    for pet in app.pumpkin_service.get_pets():
         pets.append(
             pet.to_dict()
         )
@@ -39,7 +39,7 @@ def list_pets():
 def create_pets():
     payload = None
     try:
-        pet = app.pumking_service.insert_pet(**request.json)
+        pet = app.pumpkin_service.insert_pet(**request.json)
     except (ValueError, TypeError) as ex:
         return jsonify(response(error=str(ex))), 400
     return jsonify(response(payload=pet.to_dict())), 201
@@ -48,7 +48,7 @@ def create_pets():
 @app.route('/pets/<string:pet_id>', methods=['GET'])
 def get_pets(pet_id):
     try:
-        pet = app.pumking_service.get_pet(pet_id=pet_id)
+        pet = app.pumpkin_service.get_pet(pet_id=pet_id)
     except DoesNotExist as ex:
         return jsonify(response(error=str(ex))), 404
 
@@ -58,7 +58,7 @@ def get_pets(pet_id):
 @app.route('/pets/<string:pet_id>/quote', methods=['POST'])
 def create_quote(pet_id):
     try:
-        pet = app.pumking_service.get_pet(pet_id=pet_id)
+        pet = app.pumpkin_service.get_pet(pet_id=pet_id)
     except DoesNotExist as ex:
         return jsonify(response(error=str(ex))), 404
 

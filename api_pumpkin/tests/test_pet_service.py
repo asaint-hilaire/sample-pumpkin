@@ -1,4 +1,4 @@
-from api_pumpkin.models.pet import Pet, PetCat, PetDog
+from api_pumpkin.models.pet import Pet
 from api_pumpkin.service.pet_service import PetService
 from api_pumpkin.utils.exceptions import DoesNotExist
 import unittest

@@ -1,4 +1,4 @@
-from api_pumpkin.models.pet import Pet, PetCat, PetDog
+from api_pumpkin.models.pet import PetFactory
 from api_pumpkin.utils.exceptions import DoesNotExist
 
 
@@ -19,7 +19,7 @@ class PetService(object):
         if not item:
             raise DoesNotExist()
 
-        return Pet(
+        return PetFactory(
                 id=item.get('id').get('S'),
                 name=item.get('name').get('S'),
                 age=int(item.get('age').get('N')),
@@ -32,7 +32,7 @@ class PetService(object):
     def get_pets(self):
         resp = self.client.scan(TableName=self.config.get('PETS_TABLE'))
         for item in resp.get('Items'):
-            yield Pet(
+            yield PetFactory(
                 id=item.get('id').get('S'),
                 name=item.get('name').get('S'),
                 age=int(item.get('age').get('N')),
@@ -46,7 +46,7 @@ class PetService(object):
         if kwargs.get('id') is not None:
             del kwargs['id']
 
-        pet = Pet(**kwargs)
+        pet = PetFactory(**kwargs)
         resp = self.client.put_item(
             TableName=self.config.get('PETS_TABLE'),
             Item={

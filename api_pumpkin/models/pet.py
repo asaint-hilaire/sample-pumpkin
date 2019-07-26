@@ -170,3 +170,12 @@ class PetCat(Pet):
                 (cat_breed_factors.get(self.breed)
                  if cat_breed_factors.get(self.breed) is not None
                  else cat_breed_factors.get('DEFAULT'))), 4)
+
+
+def PetFactory(**kwargs):
+    if isinstance(kwargs.get('species'), str):
+        if kwargs.get('species').lower() == 'dog':
+            return PetDog(**kwargs)
+        elif kwargs.get('species').lower() == 'cat':
+            return PetCat(**kwargs)
+    return Pet(**kwargs)

@@ -13,7 +13,7 @@ class UtilsTest(unittest.TestCase):
     def test_helper_response(self):
         resp = response(error='error', payload={'data': 'data'})
         self.assertTrue(resp.get('error') == 'error')
-        self.assertTrue(resp.get('body').get('data') == 'data')
+        self.assertTrue(resp.get('results').get('data') == 'data')
 
 
 if __name__ == '__main__':

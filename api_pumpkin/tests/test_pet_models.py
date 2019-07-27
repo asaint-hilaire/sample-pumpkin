@@ -239,6 +239,24 @@ class PetModelsTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             bird = PetFactory(**bird_dict)
 
+    def test_set_species(self):
+        '''Should not be able to set species of specialized pet'''
+        pet_species = ['dog', 'cat']
+        for species in pet_species:
+            pet_dict = {
+                'id': 1,
+                'age': 9,
+                'breed': 'siamese',
+                'zip_code': '10704',
+                'gender': 'male',
+                'name': 'Fluffy',
+                'species': 'cat'
+            }
+
+            pet = PetFactory(**pet_dict)
+            with self.assertRaises(AttributeError):
+                pet.species = 'test'
+
 
 if __name__ == '__main__':
     unittest.main()

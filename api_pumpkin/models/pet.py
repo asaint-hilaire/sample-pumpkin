@@ -143,7 +143,10 @@ class Pet(object):
 
 class PetDog(Pet):
     def __init__(self, **kwargs):
+        kwargs['species'] = 'dog'
         super().__init__(**kwargs)
+
+    species = property(Pet._get_species)
 
     def quote(self):
         dog_breed_factors = {'golden_retriever': 1.01, 'dachshund': 1.015,
@@ -159,7 +162,10 @@ class PetDog(Pet):
 
 class PetCat(Pet):
     def __init__(self, **kwargs):
+        kwargs['species'] = 'cat'
         super().__init__(**kwargs)
+
+    species = property(Pet._get_species)
 
     def quote(self):
         cat_breed_factors = {'siamese': 1.01, 'maine_coon': 1.015,

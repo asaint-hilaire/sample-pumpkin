@@ -8,7 +8,7 @@
     
     
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for api_pumpkin/app.py: 0%</title>
+    <title>Coverage for /Users/asaint-hilaire/PUMPKIN/pumpkin.backend/api_pumpkin/app.py: 0%</title>
     <link rel="stylesheet" href="style.css" type="text/css">
     
     <script type="text/javascript" src="jquery.min.js"></script>
@@ -23,7 +23,7 @@
 
 <div id="header">
     <div class="content">
-        <h1>Coverage for <b>api_pumpkin/app.py</b> :
+        <h1>Coverage for <b>/Users/asaint-hilaire/PUMPKIN/pumpkin.backend/api_pumpkin/app.py</b> :
             <span class="pc_cov">0%</span>
         </h1>
 
@@ -158,14 +158,14 @@
 <p id="t21" class="pln"><span class="key">else</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t22" class="stm mis">    <span class="nam">DYNAMO_DB_CLIENT</span> <span class="op">=</span> <span class="nam">boto3</span><span class="op">.</span><span class="nam">client</span><span class="op">(</span><span class="str">'dynamodb'</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t23" class="pln"><span class="strut">&nbsp;</span></p>
-<p id="t24" class="stm mis"><span class="nam">app</span><span class="op">.</span><span class="nam">pumking_service</span> <span class="op">=</span> <span class="nam">PetService</span><span class="op">(</span><span class="nam">client</span><span class="op">=</span><span class="nam">DYNAMO_DB_CLIENT</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
+<p id="t24" class="stm mis"><span class="nam">app</span><span class="op">.</span><span class="nam">pumpkin_service</span> <span class="op">=</span> <span class="nam">PetService</span><span class="op">(</span><span class="nam">client</span><span class="op">=</span><span class="nam">DYNAMO_DB_CLIENT</span><span class="op">,</span><span class="strut">&nbsp;</span></p>
 <p id="t25" class="pln">                                 <span class="nam">config</span><span class="op">=</span><span class="op">{</span><span class="str">'PETS_TABLE'</span><span class="op">:</span> <span class="nam">PETS_TABLE</span><span class="op">}</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t26" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t27" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t28" class="stm mis"><span class="op">@</span><span class="nam">app</span><span class="op">.</span><span class="nam">route</span><span class="op">(</span><span class="str">'/pets'</span><span class="op">,</span> <span class="nam">methods</span><span class="op">=</span><span class="op">[</span><span class="str">'GET'</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t29" class="pln"><span class="key">def</span> <span class="nam">list_pets</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t30" class="stm mis">    <span class="nam">pets</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span><span class="strut">&nbsp;</span></p>
-<p id="t31" class="stm mis">    <span class="key">for</span> <span class="nam">pet</span> <span class="key">in</span> <span class="nam">app</span><span class="op">.</span><span class="nam">pumking_service</span><span class="op">.</span><span class="nam">get_pets</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t31" class="stm mis">    <span class="key">for</span> <span class="nam">pet</span> <span class="key">in</span> <span class="nam">app</span><span class="op">.</span><span class="nam">pumpkin_service</span><span class="op">.</span><span class="nam">get_pets</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t32" class="stm mis">        <span class="nam">pets</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="strut">&nbsp;</span></p>
 <p id="t33" class="pln">            <span class="nam">pet</span><span class="op">.</span><span class="nam">to_dict</span><span class="op">(</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t34" class="pln">        <span class="op">)</span><span class="strut">&nbsp;</span></p>
@@ -176,7 +176,7 @@
 <p id="t39" class="pln"><span class="key">def</span> <span class="nam">create_pets</span><span class="op">(</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t40" class="stm mis">    <span class="nam">payload</span> <span class="op">=</span> <span class="key">None</span><span class="strut">&nbsp;</span></p>
 <p id="t41" class="stm mis">    <span class="key">try</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t42" class="stm mis">        <span class="nam">pet</span> <span class="op">=</span> <span class="nam">app</span><span class="op">.</span><span class="nam">pumking_service</span><span class="op">.</span><span class="nam">insert_pet</span><span class="op">(</span><span class="op">**</span><span class="nam">request</span><span class="op">.</span><span class="nam">json</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t42" class="stm mis">        <span class="nam">pet</span> <span class="op">=</span> <span class="nam">app</span><span class="op">.</span><span class="nam">pumpkin_service</span><span class="op">.</span><span class="nam">insert_pet</span><span class="op">(</span><span class="op">**</span><span class="nam">request</span><span class="op">.</span><span class="nam">json</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t43" class="stm mis">    <span class="key">except</span> <span class="op">(</span><span class="nam">ValueError</span><span class="op">,</span> <span class="nam">TypeError</span><span class="op">)</span> <span class="key">as</span> <span class="nam">ex</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t44" class="stm mis">        <span class="key">return</span> <span class="nam">jsonify</span><span class="op">(</span><span class="nam">response</span><span class="op">(</span><span class="nam">error</span><span class="op">=</span><span class="nam">str</span><span class="op">(</span><span class="nam">ex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">,</span> <span class="num">400</span><span class="strut">&nbsp;</span></p>
 <p id="t45" class="stm mis">    <span class="key">return</span> <span class="nam">jsonify</span><span class="op">(</span><span class="nam">response</span><span class="op">(</span><span class="nam">payload</span><span class="op">=</span><span class="nam">pet</span><span class="op">.</span><span class="nam">to_dict</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">,</span> <span class="num">201</span><span class="strut">&nbsp;</span></p>
@@ -185,7 +185,7 @@
 <p id="t48" class="stm mis"><span class="op">@</span><span class="nam">app</span><span class="op">.</span><span class="nam">route</span><span class="op">(</span><span class="str">'/pets/&lt;string:pet_id>'</span><span class="op">,</span> <span class="nam">methods</span><span class="op">=</span><span class="op">[</span><span class="str">'GET'</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t49" class="pln"><span class="key">def</span> <span class="nam">get_pets</span><span class="op">(</span><span class="nam">pet_id</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t50" class="stm mis">    <span class="key">try</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t51" class="stm mis">        <span class="nam">pet</span> <span class="op">=</span> <span class="nam">app</span><span class="op">.</span><span class="nam">pumking_service</span><span class="op">.</span><span class="nam">get_pet</span><span class="op">(</span><span class="nam">pet_id</span><span class="op">=</span><span class="nam">pet_id</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t51" class="stm mis">        <span class="nam">pet</span> <span class="op">=</span> <span class="nam">app</span><span class="op">.</span><span class="nam">pumpkin_service</span><span class="op">.</span><span class="nam">get_pet</span><span class="op">(</span><span class="nam">pet_id</span><span class="op">=</span><span class="nam">pet_id</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t52" class="stm mis">    <span class="key">except</span> <span class="nam">DoesNotExist</span> <span class="key">as</span> <span class="nam">ex</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t53" class="stm mis">        <span class="key">return</span> <span class="nam">jsonify</span><span class="op">(</span><span class="nam">response</span><span class="op">(</span><span class="nam">error</span><span class="op">=</span><span class="nam">str</span><span class="op">(</span><span class="nam">ex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">,</span> <span class="num">404</span><span class="strut">&nbsp;</span></p>
 <p id="t54" class="pln"><span class="strut">&nbsp;</span></p>
@@ -195,7 +195,7 @@
 <p id="t58" class="stm mis"><span class="op">@</span><span class="nam">app</span><span class="op">.</span><span class="nam">route</span><span class="op">(</span><span class="str">'/pets/&lt;string:pet_id>/quote'</span><span class="op">,</span> <span class="nam">methods</span><span class="op">=</span><span class="op">[</span><span class="str">'POST'</span><span class="op">]</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t59" class="pln"><span class="key">def</span> <span class="nam">create_quote</span><span class="op">(</span><span class="nam">pet_id</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t60" class="stm mis">    <span class="key">try</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
-<p id="t61" class="stm mis">        <span class="nam">pet</span> <span class="op">=</span> <span class="nam">app</span><span class="op">.</span><span class="nam">pumking_service</span><span class="op">.</span><span class="nam">get_pet</span><span class="op">(</span><span class="nam">pet_id</span><span class="op">=</span><span class="nam">pet_id</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
+<p id="t61" class="stm mis">        <span class="nam">pet</span> <span class="op">=</span> <span class="nam">app</span><span class="op">.</span><span class="nam">pumpkin_service</span><span class="op">.</span><span class="nam">get_pet</span><span class="op">(</span><span class="nam">pet_id</span><span class="op">=</span><span class="nam">pet_id</span><span class="op">)</span><span class="strut">&nbsp;</span></p>
 <p id="t62" class="stm mis">    <span class="key">except</span> <span class="nam">DoesNotExist</span> <span class="key">as</span> <span class="nam">ex</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t63" class="stm mis">        <span class="key">return</span> <span class="nam">jsonify</span><span class="op">(</span><span class="nam">response</span><span class="op">(</span><span class="nam">error</span><span class="op">=</span><span class="nam">str</span><span class="op">(</span><span class="nam">ex</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">,</span> <span class="num">404</span><span class="strut">&nbsp;</span></p>
 <p id="t64" class="pln"><span class="strut">&nbsp;</span></p>
@@ -210,7 +210,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.3</a>,
-            created at 2019-07-25 21:06
+            created at 2019-07-26 23:40
         </p>
     </div>
 </div>

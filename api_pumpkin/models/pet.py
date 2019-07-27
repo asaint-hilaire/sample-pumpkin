@@ -6,36 +6,36 @@ class Pet(object):
     BASE_PRICE = 45
 
     def __init__(self, **kwargs):
-        self.set_id(kwargs.get('id'))
-        self.set_age(kwargs.get('age'))
-        self.set_breed(kwargs.get('breed'))
-        self.set_zip_code(kwargs.get('zip_code'))
-        self.set_gender(kwargs.get('gender'))
-        self.set_name(kwargs.get('name'))
-        self.set_species(kwargs.get('species'))
+        self._set_id(kwargs.get('id'))
+        self._set_age(kwargs.get('age'))
+        self._set_breed(kwargs.get('breed'))
+        self._set_zip_code(kwargs.get('zip_code'))
+        self._set_gender(kwargs.get('gender'))
+        self._set_name(kwargs.get('name'))
+        self._set_species(kwargs.get('species'))
 
-    def get_id(self):
+    def _get_id(self):
         return self._id
 
-    def set_id(self, id):
+    def _set_id(self, id):
         if id is None:
             self._id = str(uuid.uuid1())
         else:
             self._id = id
 
-    def get_age(self):
+    def _get_age(self):
         return self._age
 
-    def set_age(self, age):
+    def _set_age(self, age):
         if isinstance(age, int):
             self._age = age
         else:
             raise TypeError('Age must be an integer type')
 
-    def get_breed(self):
+    def _get_breed(self):
         return self._breed
 
-    def set_breed(self, breed):
+    def _set_breed(self, breed):
         if isinstance(breed, str):
             if breed.strip() == '':
                 raise ValueError('Breed cannot be empty')
@@ -43,10 +43,10 @@ class Pet(object):
         else:
             raise TypeError('Breed must be a string')
 
-    def get_zip_code(self):
+    def _get_zip_code(self):
         return self._zip_code
 
-    def set_zip_code(self, zip_code):
+    def _set_zip_code(self, zip_code):
         if isinstance(zip_code, str):
             if re.match(r'\d{5}$', zip_code):
                 self._zip_code = zip_code
@@ -55,10 +55,10 @@ class Pet(object):
         else:
             raise TypeError('Zip code must be a string')
 
-    def get_gender(self):
+    def _get_gender(self):
         return self._gender
 
-    def set_gender(self, gender):
+    def _set_gender(self, gender):
         supported = ['female', 'male']
         if isinstance(gender, str):
             gender = gender.lower()
@@ -69,19 +69,19 @@ class Pet(object):
         else:
             raise TypeError('Gender must be a string')
 
-    def get_name(self):
+    def _get_name(self):
         return self._name
 
-    def set_name(self, name):
+    def _set_name(self, name):
         if isinstance(name, str):
             self._name = name
         else:
             raise TypeError('Name must be a string')
 
-    def get_species(self):
+    def _get_species(self):
         return self._species
 
-    def set_species(self, species):
+    def _set_species(self, species):
         supported = ['cat', 'dog']
         if isinstance(species, str):
             species = species.lower()
@@ -92,13 +92,13 @@ class Pet(object):
         else:
             raise TypeError('Species must be a string')
 
-    id = property(get_id, set_id)
-    age = property(get_age, set_age)
-    breed = property(get_breed, set_breed)
-    zip_code = property(get_zip_code, set_zip_code)
-    gender = property(get_gender, set_gender)
-    name = property(get_name, set_name)
-    species = property(get_species, set_species)
+    id = property(_get_id, _set_id)
+    age = property(_get_age, _set_age)
+    breed = property(_get_breed, _set_breed)
+    zip_code = property(_get_zip_code, _set_zip_code)
+    gender = property(_get_gender, _set_gender)
+    name = property(_get_name, _set_name)
+    species = property(_get_species, _set_species)
 
     def quote(self):
         age_factors = {'<1': 1.01, '1': 1.015, '2': 1.019, '3': 1.024,
